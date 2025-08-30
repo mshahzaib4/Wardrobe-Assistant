@@ -1,70 +1,41 @@
-Wardrobe Assistant – AI-Powered Fashion Recommendation System
-Wardrobe Assistant is an intelligent fashion recommendation system that leverages machine learning to classify and suggest outfits based on style, context, and user preferences. Built with FastAPI and Jinja2 templates, it provides a seamless web interface for personalized outfit recommendations.
+# Wardrobe Assistant – AI-Powered Fashion Recommendation System
 
-📋 Project Overview
+**Wardrobe Assistant** is an intelligent fashion recommendation system that leverages machine learning to classify and suggest outfits based on style, context, and user preferences. Built with **FastAPI** and **Jinja2** templates, it provides a seamless web interface for personalized outfit recommendations.
 
-Objective: Deliver tailored outfit suggestions using machine learning models for categorization and personalization.
-Dataset: Web-scraped product catalog with 5,443 entries and 19 features.
-Tech Stack: FastAPI, Pandas, Scikit-learn, CatBoost, KNN, Jinja2, HTML/CSS, Jupyter Notebooks.
-Deployment: Web application accessible via a browser.
+---
 
+## 📋 Project Overview
 
-📊 Dataset Details
+- **Objective**: Deliver tailored outfit suggestions using machine learning models for categorization and personalization.
+- **Dataset**: Web-scraped product catalog with 5,443 entries and 19 features.
+- **Tech Stack**: FastAPI, Pandas, Scikit-learn, CatBoost, KNN, Jinja2, HTML/CSS, Jupyter Notebooks.
+- **Deployment**: Web application accessible via a browser.
 
-Shape: (5,443, 19)
-Source: Web-scraped fashion product catalog
-Key Features:
+---
 
+## 📊 Dataset Details
 
-Column Name
-Description
+- **Shape**: `(5,443, 19)`
+- **Source**: Web-scraped fashion product catalog
+- **Key Features**:
+  | Column Name         | Description                              |
+  |---------------------|------------------------------------------|
+  | `product_name`      | Name of the fashion item                 |
+  | `main_category`     | Primary clothing category                |
+  | `color`             | Primary color of the item                |
+  | `occasion`          | Suitable event (e.g., Festive, Casual)   |
+  | `season`            | Ideal season (e.g., Spring, Winter)      |
+  | `price_pkr`         | Price in Pakistani Rupees (PKR)          |
+  | `discount`          | Discount percentage                      |
+  | `Gender`            | Target gender (inferred)                 |
+  | `categorize_outfit` | ML-assigned outfit type                  |
+  | `fabric`            | Material of the item (e.g., Silk, Cotton)|
 
+---
 
+## 🗂 Project Structure
 
-product_name
-Name of the fashion item
-
-
-main_category
-Primary clothing category
-
-
-color
-Primary color of the item
-
-
-occasion
-Suitable event (e.g., Festive, Casual)
-
-
-season
-Ideal season (e.g., Spring, Winter)
-
-
-price_pkr
-Price in Pakistani Rupees (PKR)
-
-
-discount
-Discount percentage
-
-
-Gender
-Target gender (inferred)
-
-
-categorize_outfit
-ML-assigned outfit type
-
-
-fabric
-Material of the item (e.g., Silk, Cotton)
-
-
-
-
-
-🗂 Project Structure
+```plaintext
 Wardrobe-Assistant/
 ├── data/
 │   └── wardrobe_assistant.csv
@@ -88,161 +59,170 @@ Wardrobe-Assistant/
 │   └── images/
 ├── requirements.txt
 └── README.md
+```
 
+---
 
-🚀 Getting Started
-Prerequisites
+## 🚀 Getting Started
 
-Python: 3.11.13
-Dependencies: Listed in requirements.txt
+### Prerequisites
 
-Installation
+- **Python**: 3.11.13
+- **Dependencies**: Listed in `requirements.txt`
 
-Clone the Repository:
-git clone https://github.com/mshahzaib4/Wardrobe-Assistant.git
-cd Wardrobe-Assistant
+### Installation
 
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/mshahzaib4/Wardrobe-Assistant.git
+   cd Wardrobe-Assistant
+   ```
 
-Set Up Virtual Environment:
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+2. **Set Up Virtual Environment**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   ```
 
+3. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Install Dependencies:
-pip install -r requirements.txt
+4. **Launch the Application**:
+   ```bash
+   uvicorn src.app:app --reload
+   ```
 
+5. **Access the Web App**:
+   Open your browser and navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
 
-Launch the Application:
-uvicorn src.app:app --reload
+---
 
+## 🌟 Features
 
-Access the Web App:Open your browser and navigate to http://127.0.0.1:8000/.
+- **Outfit Recommendations**: Personalized suggestions based on gender, season, occasion, and style.
+- **Machine Learning Pipeline**: Preprocessing, classification, and similarity search using KNN and CatBoost.
+- **Data Preprocessing**: Cleaning and normalization with `Sort_column` function.
+- **Visualization**: Interactive insights using Matplotlib and Plotly.
+- **Web Interface**: Dynamic UI built with FastAPI and Jinja2 templates.
+- **API Endpoints**: RESTful routes for seamless interaction.
 
+---
 
+## 🧠 Machine Learning Pipeline
 
-🌟 Features
+### Preprocessing
+- **Function**: `Sort_column(df: pd.DataFrame) -> pd.DataFrame`
+- **Tasks**: Data cleaning, normalization, and feature engineering for gender, season, outfit type, and price brackets.
 
-Outfit Recommendations: Personalized suggestions based on gender, season, occasion, and style.
-Machine Learning Pipeline: Preprocessing, classification, and similarity search using KNN and CatBoost.
-Data Preprocessing: Cleaning and normalization with Sort_column function.
-Visualization: Interactive insights using Matplotlib and Plotly.
-Web Interface: Dynamic UI built with FastAPI and Jinja2 templates.
-API Endpoints: RESTful routes for seamless interaction.
+### Models
+- **KNN**: Similarity-based outfit matching.
+- **CatBoostClassifier**: Outfit type classification.
+- **MissForest**: Imputation of missing values.
 
+### Visualization
+- Tools: Matplotlib, Plotly
+- Purpose: Exploratory data analysis and model performance evaluation.
 
-🧠 Machine Learning Pipeline
-Preprocessing
+---
 
-Function: Sort_column(df: pd.DataFrame) -> pd.DataFrame
-Tasks: Data cleaning, normalization, and feature engineering for gender, season, outfit type, and price brackets.
+## 🔗 API Routes
 
-Models
+| Route              | Description                           |
+|--------------------|---------------------------------------|
+| `/`                | Home page                             |
+| `/recommended`     | Outfit recommendation interface       |
+| `/features`        | Overview of application features      |
+| `/contact`         | Contact information                   |
+| `/documentation`   | API and model documentation           |
+| `/how_it_works`    | Explanation of the ML pipeline        |
 
-KNN: Similarity-based outfit matching.
-CatBoostClassifier: Outfit type classification.
-MissForest: Imputation of missing values.
+---
 
-Visualization
+## 📸 Screenshots
 
-Tools: Matplotlib, Plotly
-Purpose: Exploratory data analysis and model performance evaluation.
+### Home Page
+![Home Page](static/images/index.png)
 
+### Outfit Recommendations
+![Recommendations](static/images/recommended.png)
 
-🔗 API Routes
+### How It Works
+![How It Works](static/images/how_it_works.png)
 
+### Dataset Visualization
+![Visualization](static/images/dataset_visualization.png)
 
+*Note*: Ensure image paths are correct or update to hosted URLs if necessary.
 
-Route
-Description
+---
 
+## 📦 Dependencies
 
+### Core Libraries
+- `fastapi==0.116.0`
+- `uvicorn==0.35.0`
+- `pandas==2.3.0`
+- `catboost==1.2.8`
+- `scikit-learn==1.7.0`
+- `jinja2==3.1.6`
 
-/
-Home page
-
-
-/recommended
-Outfit recommendation interface
-
-
-/features
-Overview of application features
-
-
-/contact
-Contact information
-
-
-/documentation
-API and model documentation
-
-
-/how_it_works
-Explanation of the ML pipeline
-
-
-
-📸 Screenshots
-Home Page
-
-Outfit Recommendations
-
-How It Works
-
-Dataset Visualization
-
-Note: Ensure image paths are correct or update to hosted URLs if necessary.
-
-📦 Dependencies
-Core Libraries
-
-fastapi==0.116.0
-uvicorn==0.35.0
-pandas==2.3.0
-catboost==1.2.8
-scikit-learn==1.7.0
-jinja2==3.1.6
-
-Additional Libraries
-
-matplotlib, plotly
-lightgbm, MissForest, tqdm
-python-dotenv, httpx
+### Additional Libraries
+- `matplotlib`, `plotly`
+- `lightgbm`, `MissForest`, `tqdm`
+- `python-dotenv`, `httpx`
 
 Install all dependencies:
+```bash
 pip install -r requirements.txt
+```
 
+---
 
-🤝 Contributing
+## 🤝 Contributing
+
 We welcome contributions to enhance Wardrobe Assistant! Follow these steps:
 
-Fork the Repository:
-git clone https://github.com/mshahzaib4/Wardrobe-Assistant.git
+1. **Fork the Repository**:
+   ```bash
+   git clone https://github.com/mshahzaib4/Wardrobe-Assistant.git
+   ```
 
+2. **Create a Feature Branch**:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
 
-Create a Feature Branch:
-git checkout -b feature/your-feature-name
+3. **Commit Changes**:
+   ```bash
+   git commit -m "Add your message"
+   ```
 
+4. **Push to Your Fork**:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
 
-Commit Changes:
-git commit -m "Add your message"
+5. **Submit a Pull Request**:
+   Ensure your code adheres to the project's style guide and includes relevant tests.
 
+---
 
-Push to Your Fork:
-git push origin feature/your-feature-name
+## 📜 License
 
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
-Submit a Pull Request:Ensure your code adheres to the project's style guide and includes relevant tests.
+---
 
+## 📬 Contact
 
+**Shahzaib Yaqoob**  
+AI/ML Engineer | Data Analyst  
+📧 [shahzaibyaqoob01@gmail.com](mailto:shahzaibyaqoob01@gmail.com)  
+📍 Narowal, Pakistan  
 
-📜 License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-📬 Contact
-Shahzaib YaqoobAI/ML Engineer | Data Analyst📧 shahzaibyaqoob0488@gmail.com📍 Narowal, Pakistan  
-Connect
-
+### Connect
 - [LinkedIn](https://www.linkedin.com/in/shahzaibyaqoob/)  
 - [GitHub](https://github.com/mshahzaib4)  
 - [Kaggle](https://kaggle.com/shahzaibmalik44)  
