@@ -219,7 +219,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 **Shahzaib Yaqoob**  
 AI/ML Engineer | Data Analyst  
-📧 [shahzaibyaqoob01@gmail.com](mailto:shahzaibyaqoob01@gmail.com)  
+📧 [shahzaibyaqoob0448@gmail.com](mailto:shahzaibyaqoob0448@gmail.com)  
 📍 Narowal, Pakistan  
 
 ### Connect
