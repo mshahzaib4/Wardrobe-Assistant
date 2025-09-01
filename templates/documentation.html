@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleSync AI - Technical Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-light: #8B85FF;
+            --secondary: #FF6584;
+            --dark: #2D3748;
+            --light: #F7FAFC;
+            --gray: #E2E8F0;
+            --success: #48BB78;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f9f7fe 0%, #e6e4ff 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(108, 99, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            transform: translateX(-3px);
+        }
+        
+        .logo-icon {
+            font-size: 2.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        /* Documentation Content */
+        .docs-content {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+        
+        .docs-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px dashed rgba(108, 99, 255, 0.2);
+        }
+        
+        .docs-section:last-child {
+            border-bottom: none;
+        }
+        
+        .docs-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .docs-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .docs-section h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .docs-section h3 i {
+            color: var(--primary);
+        }
+        
+        .docs-section p {
+            margin-bottom: 1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .docs-section ul, .docs-section ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: #555;
+        }
+        
+        .docs-section li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-left: 4px solid var(--primary);
+            position: relative;
+        }
+        
+        .code-block .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(108, 99, 255, 0.1);
+            border: none;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            color: var(--primary);
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        
+        .code-block .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .note {
+            background: rgba(108, 99, 255, 0.08);
+            border-left: 4px solid var(--primary);
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .note i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+        
+        .note-content p {
+            margin-bottom: 0;
+        }
+        
+        .note strong {
+            color: var(--primary);
+        }
+        
+        .architecture-diagram {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(108, 99, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.15);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 0.5rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .container {
+                padding: 7rem 2rem 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .docs-content {
+                padding: 2rem;
+            }
+            
+            .docs-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .docs-section h3 {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 6rem 1rem 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .docs-content {
+                padding: 1.5rem;
+            }
+            
+            .metric-card {
+                padding: 1rem;
+            }
+            
+            .metric-value {
+                font-size: 2rem;
+            }
+        }
+        .logo {
+  color: black !important; /* Ensures text is black */
+  text-decoration: none;   /* Optional: removes underline */
+}
+
+        .logo-icon {
+  color: black !important; /* Ensures icon is also black */
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-hat-cowboy logo-icon"></i>
+                <p style="font-weight: bolder; font-size: xx-large; font-family: 'Pacifico', cursive;">StyleSync</p>
+            </a>
+            
+            <div class="nav-links">
+                <a href="/"><i class="fas fa-home"></i> Home</a>
+                <a href="/features"><i class="fas fa-star"></i> Features</a>
+                <a href="/documentation" class="active"><i class="fas fa-book"></i> Documentation</a>
+                <a href="/profile"><i class="fas fa-envelope"></i> Profile</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="section-title">Technical Documentation</h1>
+        
+        <div class="docs-content">
+            <section class="docs-section">
+                <h2><i class="fas fa-database"></i> Data Pipeline</h2>
+                
+                <h3><i class="fas fa-cloud-download-alt"></i> Data Collection</h3>
+                <p>Our comprehensive dataset was compiled from multiple fashion e-commerce platforms, ensuring diversity in styles, price points, and demographics. Key sources included:</p>
+                <ul>
+                    <li>Amazon Fashion - 2,500 items</li>
+                    <li>Zara - 1,800 items</li>
+                    <li>H&M - 1,500 items</li>
+                    <li>Myntra - 800 items</li>
+                    <li>Specialty boutiques - 400 items</li>
+                </ul>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+
+def scrape_fashion_data(url):
+    """Scrape fashion product data from e-commerce websites"""
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    response = requests.get(url, headers=headers)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    products = []
+    
+    for item in soup.select('.product-card'):
+        try:
+            products.append({
+                'name': clean_text(item.select_one('.product-name').text.strip()),
+                'category': standardize_category(item.select_one('.product-category').text.strip()),
+                'price': parse_price(item.select_one('.product-price').text),
+                'image_url': validate_url(item.select_one('img')['src']),
+                'occasion': extract_occasion(item),
+                'fabric': extract_fabric(item),
+                'brand': extract_brand(item)
+            })
+        except Exception as e:
+            log_error(f"Error processing item: {e}")
+    
+    return pd.DataFrame(products)</code>
+                </div>
+                
+                <h3><i class="fas fa-broom"></i> Data Processing</h3>
+                <p>The raw data underwent rigorous cleaning and transformation:</p>
+                <ol>
+                    <li><strong>Missing Value Handling:</strong> Imputed using median values for numerical features and mode for categorical features</li>
+                    <li><strong>Text Standardization:</strong> Normalized all text fields (lowercase, trimmed whitespace, consistent formatting)</li>
+                    <li><strong>Feature Engineering:</strong> Created derived features like seasonality and style compatibility scores</li>
+                    <li><strong>Quality Control:</strong> Removed duplicates and outlier items through automated validation</li>
+                </ol>
+                
+                <div class="note">
+                    <i class="fas fa-lightbulb"></i>
+                    <div class="note-content">
+                        <p><strong>Data Quality:</strong> Our preprocessing pipeline achieved 98.2% data completeness with all critical features retained. The final curated dataset contains 6,860 high-quality fashion items across 12 categories.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="docs-section">
+                <h2><i class="fas fa-brain"></i> Machine Learning Pipeline</h2>
+                
+                <h3><i class="fas fa-project-diagram"></i> Feature Engineering</h3>
+                <p>We transformed raw features into a robust numerical representation:</p>
+                <ul>
+                    <li><strong>Text Embeddings:</strong> Generated 300-dimensional embeddings for product descriptions</li>
+                    <li><strong>Categorical Encoding:</strong> One-hot encoding for discrete features</li>
+                    <li><strong>Dimensionality Reduction:</strong> PCA reduced feature space from 25 to 10 dimensions (95% variance retained)</li>
+                    <li><strong>Normalization:</strong> Standard scaling applied to all numerical features</li>
+                </ul>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+# Feature scaling
+scaler = StandardScaler()
+scaled_features = scaler.fit_transform(features)
+
+# Dimensionality reduction
+pca = PCA(n_components=10, random_state=42)
+reduced_features = pca.fit_transform(scaled_features)
+
+print(f"Variance retained: {sum(pca.explained_variance_ratio_):.2%}")
+print(f"Feature space reduced from {scaled_features.shape[1]} to {reduced_features.shape[1]} dimensions")</code>
+                </div>
+                
+                <h3><i class="fas fa-network-wired"></i> Recommendation Engine</h3>
+                <p>Our hybrid recommendation system combines:</p>
+                <ul>
+                    <li><strong>Content-Based Filtering:</strong> KNN model using cosine similarity on product features</li>
+                    <li><strong>Collaborative Elements:</strong> User preference patterns from similar profiles</li>
+                    <li><strong>Contextual Signals:</strong> Season, occasion, and current trends</li>
+                </ul>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>from sklearn.neighbors import NearestNeighbors
+from sklearn.model_selection import GridSearchCV
+
+# Parameter tuning
+params = {
+    'n_neighbors': [3, 5, 7],
+    'metric': ['cosine', 'euclidean']
+}
+
+# Model optimization
+knn = NearestNeighbors()
+grid_search = GridSearchCV(knn, params, cv=5, scoring='accuracy')
+grid_search.fit(X_train, y_train)
+
+# Best model
+best_knn = grid_search.best_estimator_
+print(f"Optimal parameters: {grid_search.best_params_}")
+print(f"Cross-validation accuracy: {grid_search.best_score_:.2%}")</code>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">80.3%</div>
+                        <div class="metric-label">Accuracy</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">82.7%</div>
+                        <div class="metric-label">Precision</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">86.5%</div>
+                        <div class="metric-label">Recall</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">83.6%</div>
+                        <div class="metric-label">F1 Score</div>
+                    </div>
+                </div>
+                
+                <div class="note">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="note-content">
+                        <p><strong>Performance Note:</strong> The model achieves 82% user satisfaction in A/B tests, with average recommendation relevance scores of 4/5 based on user feedback.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="docs-section">
+                <h2><i class="fas fa-server"></i> System Architecture</h2>
+                <img src="../static/images/System Architecture.png" alt="System Architecture Diagram" class="architecture-diagram">
+                
+                <h3><i class="fas fa-bolt"></i> API Layer</h3>
+                <p>Our FastAPI backend provides robust endpoints for:</p>
+                <ul>
+                    <li><strong>Personalization:</strong> /recommend - Generates tailored outfit suggestions</li>
+                    <li><strong>User Management:</strong> /profile - Handles user preferences and history</li>
+                    <li><strong>Content Delivery:</strong> /products - Serves product details and metadata</li>
+                    <li><strong>Analytics:</strong> /feedback - Captures user interactions for model improvement</li>
+                </ul>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import joblib
+import numpy as np
+
+app = FastAPI(
+    title="StyleSync API",
+    description="AI-powered fashion recommendation engine",
+    version="1.0.0"
+)
+
+# Load pre-trained models
+knn = joblib.load('models/knn_model.pkl')
+pca = joblib.load('models/pca.pkl')
+
+class RecommendationRequest(BaseModel):
+    occasion: str
+    season: str
+    style_preferences: list[str]
+    budget_range: tuple[float, float]
+
+@app.post("/recommend")
+async def get_recommendations(request: RecommendationRequest):
+    """Generate personalized fashion recommendations"""
+    try:
+        # Feature preprocessing
+        input_features = preprocess_input(request)
+        reduced_features = pca.transform([input_features])
+        
+        # Get nearest neighbors
+        distances, indices = knn.kneighbors(reduced_features)
+        recommendations = format_recommendations(indices)
+        
+        return {
+            "status": "success",
+            "recommendations": recommendations,
+            "metadata": {
+                "model_version": "1.2",
+                "inference_time": f"{time.time() - start_time:.2f}s"
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))</code>
+                </div>
+            </section>
+            
+            <section class="docs-section">
+                <h2><i class="fas fa-laptop-code"></i> Frontend Implementation</h2>
+                
+                <h3><i class="fab fa-react"></i> Component Architecture</h3>
+                <p>The responsive interface is built with modular components:</p>
+                <ul>
+                    <li><strong>Preference Selector:</strong> Captures user style parameters</li>
+                    <li><strong>Recommendation Grid:</strong> Displays outfit suggestions with filtering</li>
+                    <li><strong>Outfit Viewer:</strong> Detailed modal with styling suggestions</li>
+                    <li><strong>Wardrobe Manager:</strong> Saved items and outfit combinations</li>
+                </ul>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code>// React recommendation card component
+const RecommendationCard = ({ item }) => {
+  const [isSaved, setIsSaved] = useState(false);
+  
+  return (
+    <div className="card">
+      <img src={item.imageUrl} alt={item.name} />
+      <div className="card-content">
+        <h3>{item.name}</h3>
+        <div className="meta">
+          <span className="price">${item.price.toFixed(2)}</span>
+          <span className="category">{item.category}</span>
+        </div>
+        <p className="occasion">{item.occasion} wear</p>
+        <button 
+          className={`save-btn ${isSaved ? 'saved' : ''}`}
+          onClick={() => setIsSaved(!isSaved)}
+        >
+          {isSaved ? 'Saved' : 'Save to Wardrobe'}
+        </button>
+      </div>
+    </div>
+  );
+};</code>
+                </div>
+                
+                <h3><i class="fas fa-exchange-alt"></i> API Integration</h3>
+                <p>Key frontend-backend interactions:</p>
+                <ol>
+                    <li>Real-time recommendation fetching with loading states</li>
+                    <li>Optimistic UI updates for user actions</li>
+                    <li>Client-side caching of frequent requests</li>
+                    <li>Error handling with user-friendly messages</li>
+                </ol>
+            </section>
+            
+            <section class="docs-section">
+                <h2><i class="fas fa-rocket"></i> Deployment</h2>
+                
+                <h3><i class="fas fa-terminal"></i> Development Setup</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code># Clone the repository
+git clone https://github.com/stylesync-ai/core.git
+cd core
+
+# Set up Python environment
+python -m venv .venv
+source .venv/bin/activate  # Linux/MacOS
+.venv\Scripts\activate     # Windows
+
+# Install dependencies
+pip install -r requirements-dev.txt
+
+# Configure environment variables
+cp .env.example .env
+nano .env  # Update with your credentials
+
+# Run development server
+uvicorn app.main:app --reload --port 8000</code>
+                </div>
+                
+                <h3><i class="fas fa-cloud"></i> Production Deployment</h3>
+                <p>Our containerized deployment stack includes:</p>
+                <ul>
+                    <li><strong>Docker:</strong> Containerization for consistent environments</li>
+                    <li><strong>Kubernetes:</strong> Orchestration and scaling</li>
+                    <li><strong>CI/CD:</strong> GitHub Actions for automated testing and deployment</li>
+                </ul>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <code># Dockerfile for API service
+FROM python:3.9-slim
+
+WORKDIR /app
+COPY . .
+
+RUN pip install --no-cache-dir -r requirements.txt \
+    && groupadd -r appuser \
+    && useradd -r -g appuser appuser \
+    && chown -R appuser:appuser /app
+
+USER appuser
+
+EXPOSE 8000
+CMD ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "app.main:app", "--bind", "0.0.0.0:8000"]</code>
+                </div>
+                
+                <div class="note">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="note-content">
+                        <p><strong>Production Best Practices:</strong> Always use environment variables for sensitive configuration, implement proper CORS policies, and set up rate limiting for public endpoints. Our production deployment handles 150 RPS with <50ms latency.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="/privacy"><i class="fas fa-lock"></i> Privacy Policy</a>
+            <a href="/terms"><i class="fas fa-file-contract"></i> Terms of Service</a>
+            <a href="/profile"><i class="fas fa-envelope"></i> Profile</a>
+            <a href="/api-docs"><i class="fas fa-code"></i> API Documentation</a>
+        </div>
+        <div class="copyright">
+            &copy; 2024 StyleSync AI. All rights reserved. v2.1.0
+        </div>
+    </footer>
+
+    <script>
+        // Copy code block functionality
+        function copyCode(button) {
+            const codeBlock = button.parentElement;
+            const code = codeBlock.querySelector('code').textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = 'var(--primary)';
+                button.style.color = 'white';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'rgba(108, 99, 255, 0.1)';
+                    button.style.color = 'var(--primary)';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

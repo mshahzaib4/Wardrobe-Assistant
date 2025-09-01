@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StyleSync AI - How It Works</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-light: #8B85FF;
+            --secondary: #FF6584;
+            --dark: #2D3748;
+            --light: #F7FAFC;
+            --gray: #E2E8F0;
+            --success: #48BB78;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f9f7fe 0%, #e6e4ff 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(108, 99, 255, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            transform: translateX(-3px);
+        }
+        
+        .logo-icon {
+            font-size: 2.2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        /* How It Works Content */
+        .how-it-works-content {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+        
+        .process-steps {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .process-line {
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-light));
+            z-index: 1;
+            border-radius: 2px;
+            transform: scaleY(0);
+            transform-origin: top;
+            animation: growLine 1.5s 0.5s forwards;
+        }
+        
+        @keyframes growLine {
+            to { transform: scaleY(1); }
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: fadeInRight 0.6s forwards;
+        }
+        
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .step:nth-child(1) { animation-delay: 0.7s; }
+        .step:nth-child(2) { animation-delay: 1s; }
+        .step:nth-child(3) { animation-delay: 1.3s; }
+        .step:nth-child(4) { animation-delay: 1.6s; }
+        
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+            border: 4px solid var(--primary);
+            flex-shrink: 0;
+            margin-right: 2rem;
+            box-shadow: 0 5px 20px rgba(108, 99, 255, 0.2);
+            transition: var(--transition);
+        }
+        
+        .step:hover .step-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: var(--primary);
+            color: white;
+        }
+        
+        .step-content {
+            padding-top: 0.8rem;
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .step-desc {
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        .tech-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .tech-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(108, 99, 255, 0.1);
+            transition: var(--transition);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .tech-card:nth-child(1) { animation-delay: 1.9s; }
+        .tech-card:nth-child(2) { animation-delay: 2.1s; }
+        .tech-card:nth-child(3) { animation-delay: 2.3s; }
+        
+        .tech-card:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.15);
+        }
+        
+        .tech-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .tech-desc {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+            transform: translateY(0);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(108, 99, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(108, 99, 255, 0); }
+        }
+        
+        .cta-button:hover {
+            background: var(--primary-light);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .container {
+                padding: 7rem 2rem 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .how-it-works-content {
+                padding: 2rem;
+            }
+            
+            .step {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .step-icon {
+                margin-bottom: 1.5rem;
+                margin-right: 0;
+            }
+            
+            .process-line {
+                left: 40px;
+                height: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 6rem 1rem 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .how-it-works-content {
+                padding: 1.5rem;
+            }
+            
+            .process-line {
+                left: 20px;
+            }
+            
+            .step-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+        .logo {
+  color: black !important; /* Ensures text is black */
+  text-decoration: none;   /* Optional: removes underline */
+}
+
+        .logo-icon {
+  color: black !important; /* Ensures icon is also black */
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-hat-cowboy logo-icon"></i>
+                <p style="font-weight: bolder; font-size: xx-large; font-family: 'Pacifico', cursive;">StyleSync</p>
+            </a>
+            
+            <div class="nav-links">
+                <a href="/"><i class="fas fa-home"></i> Home</a>
+                <a href="/features"><i class="fas fa-star"></i> Features</a>
+                <a href="/how-it-works" class="active"><i class="fas fa-cogs"></i> How It Works</a>
+                <a href="/documentation"><i class="fas fa-book"></i> Documentation</a>
+                <a href="/profile"><i class="fas fa-envelope"></i> Profile</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="section-title">How StyleSync Works</h1>
+        
+        <div class="how-it-works-content">
+            <p style="text-align: center; margin-bottom: 3rem; font-size: 1.1rem; color: #555;">
+                Discover the magic behind our AI-powered fashion recommendation engine in four simple steps
+            </p>
+            
+            <div class="process-steps">
+                <div class="process-line"></div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-cloud-download-alt"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-title">1. Data Collection</h3>
+                        <p class="step-desc">
+                            Our system continuously gathers fashion items from top retailers, analyzing thousands of products daily.
+                            We collect details like style, fabric, color, price, and customer reviews to build a comprehensive
+                            fashion database.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-title">2. Data Processing</h3>
+                        <p class="step-desc">
+                            The raw data is cleaned and standardized using advanced algorithms. We categorize each item,
+                            extract key features, and normalize the data for our recommendation engine. Our system achieves
+                            98% data accuracy after processing.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-title">3. AI Analysis</h3>
+                        <p class="step-desc">
+                            Our machine learning models analyze your preferences, body type, and occasion requirements.
+                            Using K-Nearest Neighbors and collaborative filtering, we find patterns and similarities
+                            across millions of data points to suggest perfect matches.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-title">4. Personalized Recommendations</h3>
+                        <p class="step-desc">
+                            The system delivers tailored outfit suggestions through our intuitive interface. As you interact
+                            with recommendations, our AI continuously learns and refines future suggestions to match your
+                            evolving style preferences.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 style="text-align: center; font-family: 'Playfair Display', serif; color: var(--dark); margin: 4rem 0 2rem;">
+                Powered By Advanced Technology
+            </h2>
+            
+            <div class="tech-highlights">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 class="tech-title">Machine Learning</h3>
+                    <p class="tech-desc">
+                        Our KNN algorithm with cosine similarity metric ensures accurate recommendations based on your unique style signup.
+                    </p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="tech-title">Cloud Infrastructure</h3>
+                    <p class="tech-desc">
+                        Scalable cloud architecture handles millions of fashion items and delivers recommendations in milliseconds.
+                    </p>
+                </div>
+                
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="tech-title">Responsive Design</h3>
+                    <p class="tech-desc">
+                        Seamless experience across all devices with our mobile-first approach and adaptive interfaces.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <a href="/features" class="cta-button">
+                    <i class="fas fa-star"></i> Explore All Features
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/profile">Profile</a>
+            <a href="/documentation">API Documentation</a>
+        </div>
+        <div class="copyright">
+            &copy; 2024 StyleSync AI. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.step, .tech-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if(elementPosition < screenPosition) {
+                    element.style.animationPlayState = 'running';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+        
+        // Start process line animation when in view
+        const processLine = document.querySelector('.process-line');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        });
+        
+        observer.observe(processLine);
+    </script>
+</body>
+</html>
