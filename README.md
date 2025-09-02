@@ -142,19 +142,30 @@ Wardrobe-Assistant/
 
 ## 📸 Screenshots
 
-### Home Page
-![Home Page](static/images/index.png)
+### 🏠 Home Page
+![Home Page](static/Images/navbar.png)
+![Home Page](static/Images/index.png)
+![Home Page](static/Images/index__.png)
+![Home Page](static/Images/index___.png)
+![Home Page](static/Images/index____.png)
+![Home Page](static/Images/index_____.png)
+![Home Page](static/Images/index______.png)
+![Home Page](static/Images/index_______.png)
+![Home Page](static/Images/index________.png)
+![Home Page](static/Images/buttom.png)
 
-### Outfit Recommendations
-![Recommendations](static/images/recommended.png)
+### 🏠 Form Page
+![Home Page](static/Images/form.png)
 
-### How It Works
-![How It Works](static/images/how_it_works.png)
-
-### Dataset Visualization
-![Visualization](static/images/dataset_visualization.png)
-
-*Note*: Ensure image paths are correct or update to hosted URLs if necessary.
+### 👗 Outfit Recommendations
+![Recommendations](static/Images/navbar.png)
+![Recommendations](static/Images/recommended_.png)
+![Recommendations](static/Images/recommended__.png)
+![Recommendations](static/Images/recommended___.png)
+![Recommendations](static/Images/recommended____.png)
+![Recommendations](static/Images/recommended_____.png)
+![Recommendations](static/Images/recommended______.png)
+![Home Page](static/Images/buttom.png)
 
 ---
 
@@ -226,5 +237,3 @@ AI/ML Engineer | Data Analyst
 - [LinkedIn](https://www.linkedin.com/in/shahzaibyaqoob/)  
 - [GitHub](https://github.com/mshahzaib4)  
 - [Kaggle](https://kaggle.com/shahzaibmalik44)  
-
-For questions, suggestions, or collaborations, feel free to reach out!
