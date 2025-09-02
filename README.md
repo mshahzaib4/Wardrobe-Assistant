@@ -154,8 +154,6 @@ Wardrobe-Assistant/
 ### Dataset Visualization
 ![Visualization](static/images/dataset_visualization.png)
 
-*Note*: Ensure image paths are correct or update to hosted URLs if necessary.
-
 ---
 
 ## 📦 Dependencies
@@ -227,4 +225,4 @@ AI/ML Engineer | Data Analyst
 - [GitHub](https://github.com/mshahzaib4)  
 - [Kaggle](https://kaggle.com/shahzaibmalik44)  
 
-For questions, suggestions, or collaborations, feel free to reach out!
+![Visualization](static/images/about.png)
